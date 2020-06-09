@@ -114,20 +114,20 @@ class RequestHandler(http.server.SimpleHTTPRequestHandler):
     self.wfile.write(encoded)
 
 
-  def build_location():
+  def build_location(self):
     """Construit la liste des dictionnaires contenant les infos a afficher dans les bulles: id+lat+lon+Nom pays+Capitale"""
     c = conn.cursor()
     
     # recuperation des infos dans la base SQL
-    c.execute("SELECT latitude,logitude,name,capital FROM countries")
+    c.execute("SELECT latitude,longitude,name,capital FROM countries")
     r = c.fetchall()  # liste de tuple contenant les donnees demandees, un tuple par pays
     
     # Construction du dictionnaire
     data=[]
     i=0
-    dictpays={}
     for a in r:
         i+=1
+        dictpays={}
         dictpays['id']=i
         dictpays['latitude']=a[0]
         dictpays['longitude']=a[1]
@@ -137,7 +137,7 @@ class RequestHandler(http.server.SimpleHTTPRequestHandler):
     return data
 
     
-  def build_description():
+  def build_description(self):
     """Construit la liste des dictionnaires contenant les infos a afficher hors de la carte"""
     c = conn.cursor()
     c.execute("SELECT name,flag,capital,latitude,longitude,leader,language,population FROM countries")

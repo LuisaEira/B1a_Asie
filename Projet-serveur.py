@@ -25,7 +25,7 @@ class RequestHandler(http.server.SimpleHTTPRequestHandler):
     # on recupere les parametres
     self.init_params()
     
-    # requete location - retourne la liste de lieux et leurs coordonnÃ©es geogrpahiques (pour bulle)
+    # requete location - retourne la liste de lieux et leurs coordonnees geographiques (pour bulle)
     if self.path_info[0] == "location":
       data= self.build_location()
       self.send_json(data)
@@ -40,7 +40,7 @@ class RequestHandler(http.server.SimpleHTTPRequestHandler):
     
     # requete generique
     elif self.path_info[0] == "service":
-      self.send_html('<p>Path info : <code>{}</p><p>Chaîne de requête : <code>{}</code></p>' \
+      self.send_html('<p>Path info : <code>{}</p><p>ChaÃ®ne de requÃªte : <code>{}</code></p>' \
           .format('/'.join(self.path_info),self.query_string));
     
     else:
@@ -115,47 +115,47 @@ class RequestHandler(http.server.SimpleHTTPRequestHandler):
 
 
   def build_location():
-    """Construit la liste des dictionnaires contenant les infos a afficher dans les bulles: id+lat+lon+Nom pays + Capitale"""
+    """Construit la liste des dictionnaires contenant les infos a afficher dans les bulles: id+lat+lon+Nom pays+Capitale"""
     c = conn.cursor()
     
-    # récupération des infos dans la base SQL
-    c.execute("SELECT latitude,logitude,name,capitale FROM countries")
+    # recuperation des infos dans la base SQL
+    c.execute("SELECT latitude,logitude,name,capital FROM countries")
     r = c.fetchall()  # liste de tuple contenant les donnees demandees, un tuple par pays
     
     # Construction du dictionnaire
     data=[]
     i=0
+    dictpays={}
     for a in r:
         i+=1
-        dictpays={}
-        dictpays('id')=i
-        dictpays('latitude')=a[0]
-        dictpays('longitude')=a[1]
-        dictpays('name')=a[2]
-        dictpays('capitale')=a[3]
+        dictpays['id']=i
+        dictpays['latitude']=a[0]
+        dictpays['longitude']=a[1]
+        dictpays['name']=a[2]
+        dictpays['capital']=a[3]
         data.append(dictpays)
     return data
 
     
-  def build_description(country):
+  def build_description():
     """Construit la liste des dictionnaires contenant les infos a afficher hors de la carte"""
     c = conn.cursor()
-    c.execute("SELECT name,drapeau,capitale,latitude,longitude,leader,language,population FROM countries")
+    c.execute("SELECT name,flag,capital,latitude,longitude,leader,language,population FROM countries")
     r = c.fetchall()  # liste de tuple contenant les donnees demandees, un tuple par pays
     data=[]
     i=0
     for a in r:
         i+=1
         dictpays={}
-        dictpays('id')=i
-        dictpays('name')=a[0]
-        dictpays('drapeau')=a[1]
-        dictpays('capitale')=a[2]
-        dictpays('latitude')=a[3]
-        dictpays('longitude')=a[4]
-        dictpays('leader')=a[5]
-        dictpays('language')=a[6]
-        dictpays('population')=a[7]
+        dictpays['id']=i
+        dictpays['name']=a[0]
+        dictpays['flag']=a[1]
+        dictpays['capital']=a[2]
+        dictpays['latitude']=a[3]
+        dictpays['longitude']=a[4]
+        dictpays['leader']=a[5]
+        dictpays['language']=a[6]
+        dictpays['population']=a[7]
         data.append(dictpays)
     return data
 

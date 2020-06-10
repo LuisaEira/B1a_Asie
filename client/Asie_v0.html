@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<title>TD3-s7.html</title>
+<title>Model</title>
 <script src="leaflet.js"> // Bibliothèque Leaflet : http://leafletjs.com/ </script>
 <link rel='stylesheet' type="text/css" href='https://fonts.googleapis.com/css?family=Roboto'>
 <link rel="stylesheet" type="text/css" href="leaflet.css" /> 
@@ -76,19 +76,6 @@ option[disabled] {
 <div id="left">
 <h1>Countries of the world</h1>
 
-<!-- Choix du continent -->
-<div>
-<label><span>Continent:</span>
-<select class="sel" id="select_continent" name="select_continent" value="">
-<option value="" disabled selected>Select continent
-<option data-color="violet">africa
-<option data-color="yellow">asia
-<option data-color="blue">europe
-<option data-color="red">north_america
-<option data-color="green">oceania
-<option data-color="orange">south_america
-</select></label>
-</div>
 
 <!-- Zone pour l'affichage dynamique des descriptions -->
 <div id="country_data" class="hidden">
@@ -108,10 +95,10 @@ option[disabled] {
 
 <script>
 // reset du select
-window.select_continent.options[0].selected = 'selected';
+// window.select_continent.options[0].selected = 'selected';
 
 // création d'une carte dans la balise div "map",
-window.leaflet_map = L.map('map',{zoomSnap: 0.01});
+window.leaflet_map = L.map('map').setView([0,0],1);
 
 // ajout d'une couche de dalles OpenStreetMap
 L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
@@ -121,16 +108,20 @@ L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
 // affichage de l'échelle
 L.control.scale({imperial:false}).addTo(leaflet_map);
 
+var url = '/service/countries/asia';
+
+AJAX( url,init_map.bind(2),display_error);
+
 // récupération de la liste des pays lors du choix d'un continent
-window.select_continent.onchange = function(e) {
-  var url = '/service/countries/'+window.select_continent.value
-    , option = e.target.selectedOptions[0]
-  ;
+//window.select_continent.onchange = function(e) {
+//  var url = '/service/countries/'+window.select_continent.value
+//    , option = e.target.selectedOptions[0]
+//  ;
   // requête AJAX - lors de la réponse du serveur la fonction init_map
   // sera appelée, avec la variable 'this' correspondant à l'option
   // sélectionnée dans la liste de sélection des continents
-  AJAX( url,init_map.bind(option),display_error);
-}
+//  AJAX( url,init_map.bind(option),display_error);
+//}
 
 // gestion de la réponse à la requête de récupération de la liste des pays
 function init_map(response) {
@@ -145,7 +136,7 @@ function init_map(response) {
 
   // on récupère la couleur du marqueur via l'attribut data-color
   // de l'option sélectionnée dans la liste de sélection des continents
-  var color = this.dataset.color;
+  var color = "blue";
 
   // si on n'a pas encore généré de marqueurs pour ce continent
   if ( ! marker_icons.hasOwnProperty(color) ) {
@@ -159,7 +150,7 @@ function init_map(response) {
       // insertion d'un marqueur à la position de la capitale
       var marker = L.marker(
         [country.latitude,country.longitude],
-        {icon: marker_icons[this.dataset.color]});
+        {icon: marker_icons["blue"]});
       marker.addTo(leaflet_map);
 
       // attachement d'un popup au marqueur

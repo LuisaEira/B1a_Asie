@@ -177,6 +177,8 @@ class RequestHandler(http.server.SimpleHTTPRequestHandler):
       body += '<li>{}: {}</li>'.format('Capital',r['capital'])
       body += '<li>{}: {:.3f}</li>'.format('Latitude',r['latitude'])
       body += '<li>{}: {:.3f}</li>'.format('Longitude',r['longitude'])
+      body += '<li>{}: {:.3f}</li>'.format('Area',r['area'])
+      body += '<li>{}: {}</li>'.format('Language',r['language'].capitalize())
       body += '</ul>'
       body += '</main>'
 
@@ -209,7 +211,7 @@ class RequestHandler(http.server.SimpleHTTPRequestHandler):
   #
   def db_get_countries(self,continent=None):
     c = conn.cursor()
-    sql = 'SELECT wp, capital, latitude, longitude from countries'
+    sql = 'SELECT wp, capital, latitude, longitude, area, language from countries'
 
     # les pays d'un continent
     if continent:

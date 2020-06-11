@@ -84,7 +84,7 @@ option[disabled] {
  <div><span class="label">Latitude:</span><span class="value" id="latitude"></span></div>
  <div><span class="label">Longitude:</span><span class="value" id="longitude"></span></div>
  <div><span class="label">Area:</span><span class="value" id="area"></span></div>
- <div><span class="label">Language:</span><span class="value" id="languaga"></span></div>
+ <div><span class="label">Language:</span><span class="value" id="language"></span></div>
  <div><span class="label">Read more on:</span><a id="wp" href="">wikipedia</a></div>
 </div>
 
@@ -222,6 +222,8 @@ function display_data(response) {
   window.latitude.textContent = data.latitude.toFixed(3);
   window.longitude.textContent = data.longitude.toFixed(3);
   window.wp.href = 'https://en.wikipedia.org/wiki/'+data.wp;
+  window.area.textContent = data.area.toFixed(3);
+  window.language.textContent = data.language;
   window.continent.textContent = data.continent.split(',').map(c => {
     return c.charAt(0).toUpperCase() + c.slice(1);
   }).join(', ');

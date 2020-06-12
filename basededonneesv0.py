@@ -18,17 +18,19 @@ def get_infobox(pays):
     
 def miseajour_bd(conn,info):
     c = conn.cursor()
-    sql = 'INSERT INTO countries VALUES (?,?,?)'
+    sql = 'INSERT INTO countries VALUES (?,?,?,?,?)'
     
     nom = get_nom(info)
     #drapeau = get_drapeau(info)
     capitale = get_capitale(info)
-    #coords_capitale = get_coords_capitale(info)
+    coords_dico=get_coords_dico(info)
+    lat=coords_dico['lat']
+    lon=coords_dico['lon']
     #dirigeant = get_dirigeant(info)
     langue = get_langue(info)
     area = get_area(info)
     
-    c.execute(sql,(nom,capitale,population))
+    c.execute(sql,(nom,capitale,lat,lon,area))
     conn.commit()
     
     return

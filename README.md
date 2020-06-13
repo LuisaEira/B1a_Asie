@@ -27,3 +27,6 @@ Interface : Luisa
 Données à afficher : 
 
 Nom, capitale, surface, drapeau, coordonnées et langue officielle
+
+----------------------------------------------------------------------
+Adresse : http://localhost:8080/Asie_v1.html 

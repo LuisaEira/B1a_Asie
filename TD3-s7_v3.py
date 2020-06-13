@@ -25,10 +25,6 @@ class RequestHandler(http.server.SimpleHTTPRequestHandler):
   def do_GET(self):
     # on récupère les paramètres
     self.init_params()
-
-    # le chemin d'accès commence par /time
-#    if self.path.startswith('/time'):
-#      self.send_time()
    
     # le chemin d'accès commence par /countries
     if self.path.startswith('/countries'):
@@ -98,28 +94,6 @@ class RequestHandler(http.server.SimpleHTTPRequestHandler):
     print('body =',length,ctype,self.body)
     print('params =', self.params)
 
-
-  #
-  # On envoie un document avec l'heure
-  #
-  def send_time(self):
-    
-    # on récupère l'heure
-    time = self.date_time_string()
-
-    # on génère un document au format html
-    body = '<!doctype html>' + \
-           '<meta charset="utf-8">' + \
-           '<title>l\'heure</title>' + \
-           '<div>Voici l\'heure du serveur :</div>' + \
-           '<pre>{}</pre>'.format(time)
-
-    # pour prévenir qu'il s'agit d'une ressource au format html
-    headers = [('Content-Type','text/html;charset=utf-8')]
-
-    # on envoie
-    self.send(body,headers)
-
   #
   # On renvoie la liste des pays avec leurs coordonnées
   #
@@ -173,7 +147,6 @@ class RequestHandler(http.server.SimpleHTTPRequestHandler):
       body += '<main>'
       body += '<h1>{}</h1>'.format(r['name'])
       body += '<ul>'
-      body += '<li>{}: {}</li>'.format('Continent',r['continent'].capitalize())
       body += '<li>{}: {}</li>'.format('Capital',r['capital'])
       body += '<li>{}: {:.3f}</li>'.format('Latitude',r['latitude'])
       body += '<li>{}: {:.3f}</li>'.format('Longitude',r['longitude'])

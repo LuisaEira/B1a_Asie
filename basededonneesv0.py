@@ -18,7 +18,7 @@ def get_infobox(pays):
     
 def miseajour_bd(conn,info):
     c = conn.cursor()
-    sql = 'INSERT INTO countries VALUES (?,?,?,?,?)'
+    sql = 'INSERT INTO countries VALUES (?,?,?,?,?,?)'
     
     nom = get_nom(info)
     #drapeau = get_drapeau(info)
@@ -30,7 +30,7 @@ def miseajour_bd(conn,info):
     langue = get_langue(info)
     area = get_area(info)
     
-    c.execute(sql,(nom,capitale,lat,lon,area))
+    c.execute(sql,(nom,capitale,lat,lon,area,langue))
     conn.commit()
     
     return

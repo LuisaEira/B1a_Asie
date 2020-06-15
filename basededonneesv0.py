@@ -27,10 +27,10 @@ def miseajour_bd(conn,info):
     lat=coords_dico['lat']
     lon=coords_dico['lon']
     #dirigeant = get_dirigeant(info)
-    langue = get_langue(info)
+    pib = get_pib(info)
     area = get_area(info)
     
-    c.execute(sql,(nom,capitale,lat,lon,area,langue))
+    c.execute(sql,(nom,capitale,lat,lon,area,pib))
     conn.commit()
     
     return
@@ -130,19 +130,49 @@ def get_coords_str(info):
     else:
         return None
 
-def get_langue(info):
-    try:
-        langue = info['official_languages']
-        m = re.match("\[\[(\w+)\]\]", langue)  # On enlève les doubles crochets
-        if m!=None:
-            langue = m.group(1)    
-        else:						
-            langue ='None'			
-        return(langue) 
+def get_pib(info):
+    string = info['GDP_PPP']
+    if string[0] == '{':
+        liste = string.split('|')
         
-    except KeyError:			# Si le pays n'a pas de langue officielle 
-        return "None"    
+        for i in liste :
+            if i[0]== '$':
+                string = i
     
+        
+    if 'billion' in string :
+        
+        rendu = ''
+        for i in string :
+            if i == '.':
+                rendu += i
+            try :
+                nombre = int(i)
+                rendu += i    
+            except ValueError :
+                pass
+        try :
+            rendu = float(rendu)*1e9
+            return int(rendu)
+        except ValueError :
+            return 0
+    
+    if 'trillion' in string :
+        rendu = ''
+        for i in string :
+            if i == '.':
+                rendu += i
+            try :
+                nombre = int(i)
+                rendu += i    
+            except ValueError :
+                pass
+        try :
+            rendu = float(rendu)*1e12
+            return int(rendu)
+        except ValueError :
+            return 0
+
 # Tests
 liste_pays = get_liste_pays()
 for pays in liste_pays[:]: 

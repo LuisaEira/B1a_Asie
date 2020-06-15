@@ -18,7 +18,7 @@ def get_infobox(pays):
     
 def miseajour_bd(conn,info):
     c = conn.cursor()
-    sql = 'INSERT INTO countries VALUES (?,?,?,?,?,?)'
+    sql = 'INSERT INTO countries VALUES (?,?,?,?,?,?,?)'
     
     nom = get_nom(info)
     #drapeau = get_drapeau(info)
@@ -26,11 +26,11 @@ def miseajour_bd(conn,info):
     coords_dico=get_coords_dico(info)
     lat=coords_dico['lat']
     lon=coords_dico['lon']
-    #dirigeant = get_dirigeant(info)
+    dirigeant = get_dirigeant(info)
     pib = get_pib(info)
     area = get_area(info)
     
-    c.execute(sql,(nom,capitale,lat,lon,area,pib))
+    c.execute(sql,(nom,capitale,lat,lon,dirigeant,area,pib))
     conn.commit()
     
     return
@@ -53,11 +53,6 @@ def get_capitale(info):
     
     except KeyError:
         return "Ce pays n'a pas de capitale"
-
-def get_area(info):
-    pop = info['area_km2']
-    return pop.replace(',',"")
-
 
 def cv_coords(str_coords):
     c = str_coords.split('|')[1:-1]
@@ -130,6 +125,26 @@ def get_coords_str(info):
     else:
         return None
 
+def get_dirigeant(info)    
+    try:
+        dirigeant = info['leader_name1']
+        m = dirigeant[2:-2]
+        if m != None:
+            dirigeant = m
+        else:
+            dirigeant = 'None'
+            
+        if 'nowrap' in dirigeant:
+            dirigeant = m[10:-4]
+            
+        return dirigeant
+    except KeyError:
+        return None
+
+def get_area(info):
+    pop = info['area_km2']
+    return pop.replace(',',"")    
+    
 def get_pib(info):
     string = info['GDP_PPP']
     if string[0] == '{':

@@ -58,8 +58,6 @@ def get_area(info):
     pop = info['area_km2']
     return pop.replace(',',"")
 
-def get_langue(info):
-    return
 
 def cv_coords(str_coords):
     c = str_coords.split('|')[1:-1]
@@ -132,6 +130,18 @@ def get_coords_str(info):
     else:
         return None
 
+def get_langue(info):
+    try:
+        langue = info['official_languages']
+        m = re.match("\[\[(\w+)\]\]", langue)  # On enlève les doubles crochets
+        if m!=None:
+            langue = m.group(1)    
+        else:						
+            langue ='None'			
+        return(langue) 
+        
+    except KeyError:			# Si le pays n'a pas de langue officielle 
+        return "None"    
     
 # Tests
 liste_pays = get_liste_pays()

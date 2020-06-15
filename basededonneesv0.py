@@ -27,8 +27,8 @@ def miseajour_bd(conn,info):
     lat=coords_dico['lat']
     lon=coords_dico['lon']
     dirigeant = get_dirigeant(info)
-    pib = get_pib(info)
     area = get_area(info)
+    pib = get_pib(info)
     
     c.execute(sql,(nom,capitale,lat,lon,dirigeant,area,pib))
     conn.commit()

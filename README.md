@@ -1,20 +1,19 @@
 # B1a_Asie
+Bienvenue à notre projet !
+Toutes les instructions nécessaires à l'installation de notre application se trouvent dans le fichier manuel_intalation.txt et toutes les instructions nécessaires à son utilisation se trouvent dans le fichier manuel_utilisateur.txt.
+En outre, tous les documents demandés pour l'évaluation se trouvent dans le dossier Rendu.
+
+-----------------------------------------------------------------------
+		Pour la genstion du group : 
+----------------------------------------------------------------------
 TO DO :
 
-Finir la base de données (drapeau, coordonnées et langue officielle)
+(Done) Finir la base de données (drapeau, coordonnées et langue officielle)
 (Done) Adapter le modèle html pour la base de données complete
-Adapter le serveur pour comporter la carte glissante
-Tester l'ensemble
+(Done) Adapter le serveur pour comporter la carte glissante
+(Done) Tester l'ensemble
 Documentation
 Vidéo démo
-
-----------------------------------------------------------------------
-Projet d'info tc3 : 
-
-Une interface présentant des informations générales sur un ensemble de pays appartenant à un ou
-plusieurs continents. L'élément principal de l'interface sera une carte glissante avec des POI (points
-d'intérêt) correspondant à la capitale de chacun des pays.
-Lorsqu’on clique sur un POI, les données relatives au pays sélectionné doivent s'afficher.
 
 ----------------------------------------------------------------------
 Division des tâches:
@@ -26,7 +25,7 @@ Interface : Luisa
 ----------------------------------------------------------------------
 Données à afficher : 
 
-Nom, capitale, surface, drapeau, coordonnées et langue officielle
+Nom, capitale, surface, drapeau, coordonnées, leader, PIB
 
 ----------------------------------------------------------------------
-Adresse : http://localhost:8080/Asie_v1.html 
+Adresse : http://localhost:8080/Asie.html 

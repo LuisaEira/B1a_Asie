@@ -125,7 +125,7 @@ def get_coords_str(info):
     else:
         return None
 
-def get_dirigeant(info)    
+def get_dirigeant(info):    
     try:
         dirigeant = info['leader_name1']
         m = dirigeant[2:-2]

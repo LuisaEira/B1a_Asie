@@ -6,7 +6,7 @@ import json
 from zipfile import ZipFile
 import re
 
-conn = sqlite3.connect('pays_test_html.sqlite')
+conn = sqlite3.connect('pays_test.sqlite')
 
 def get_liste_pays():
     with ZipFile('asia.zip','r') as fichier:
@@ -18,19 +18,19 @@ def get_infobox(pays):
     
 def miseajour_bd(conn,info):
     c = conn.cursor()
-    sql = 'INSERT INTO countries VALUES (?,?,?,?,?,?,?)'
+    sql = 'INSERT INTO countries VALUES (?,?,?,?,?,?,?,?)'
     
     nom = get_nom(info)
-    #drapeau = get_drapeau(info)
+    long_name = get_long_name(info)
     capitale = get_capitale(info)
-    coords_dico=get_coords_dico(info)
-    lat=coords_dico['lat']
-    lon=coords_dico['lon']
+    coords_dic=get_coords_dic(info)
+    lat=coords_dic['lat']
+    lon=coords_dic['lon']
     dirigeant = get_dirigeant(info)
     area = get_area(info)
     pib = get_pib(info)
     
-    c.execute(sql,(nom,capitale,lat,lon,dirigeant,area,pib))
+    c.execute(sql,(nom,long_name,capitale,lat,lon,dirigeant,area,pib))
     conn.commit()
     
     return
@@ -38,8 +38,11 @@ def miseajour_bd(conn,info):
 def get_nom(info):
     return info['common_name']
 
-def get_drapeau(info):
-    return
+def get_long_name(info):
+    try:
+        return info['conventional_long_name']
+    except KeyError:
+        return "None"
 
 def get_capitale(info):
     try:
@@ -105,7 +108,7 @@ def cv_coords(str_coords):
     
     return {'lat':lat, 'lon':lon}
 
-def get_coords_dico(info):
+def get_coords_dic(info):
     try:
         coords = info['coordinates']
     except KeyError:

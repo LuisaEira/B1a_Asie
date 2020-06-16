@@ -1,0 +1,9 @@
+Pour bien instaler l'application :
+1 - Clonez ou téléchargez le dépôt github sur votre ordinateur afin de pouvoir exécuter correctement les codes.
+2 - Exécutez le code en python "serveur.py".
+3 - Vérifiez que le code du serveur fonctionne en permanence et ouvrez le lien : http://localhost:8080/Asie.html
+4 - Profitez de l'application ! 
+
+Pour plus d'instructions sur le fonctionnement de l'application elle-même, consultez le manuel de l'utilisateur disponible au fichier manuel_utilisateur.txt
+
+Remarque : Il peut arriver que le code du serveur ne soit pas exécuté en raison d'une erreur telle que "OSError: [Errno 98] Address already in use", dans ce cas, assurez-vous qu'aucun autre serveur ne fonctionne simultanément.

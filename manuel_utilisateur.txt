@@ -1,0 +1,7 @@
+Voici le fonctionnement de l'application :
+Une fois installée, l'application ouvre son interface avec une carte et un champ pour la sélection du pays. Il y a deux façons de choisir un pays :
+- Un marqueur a été placé dans chaque capitale sur la carte. Nous pouvons cliquer sur ce marqueur pour afficher les informations relatives à ce pays.
+- Il y a également une boîte à sélectionner avec une liste de tous les pays, les informations du pays sélectionné seront affichées.
+Dans les deux cas, le marqueur dans la capitale du pays sélectionné deviendra vert, pour sa meilleure localisation sur la carte, ainsi que pour différencier les pays qui ont déjà été analysés de ceux qui ne l'ont pas encore été.
+On peut sélectionner le même pays aussi souvent que nécessaire.
+Informations affichées : nom complet, capitale, surface, drapeau, coordonnées, leader, PIB

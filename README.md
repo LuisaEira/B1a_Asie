@@ -4,22 +4,29 @@ Toutes les instructions nécessaires à l'installation de notre application se t
 En outre, tous les documents demandés pour l'évaluation se trouvent dans le dossier Rendu.
 
 -----------------------------------------------------------------------
-		Pour la genstion du group : 
-----------------------------------------------------------------------
+# Pour la genstion du group : 
+
 TO DO :
 
 (Done) Finir la base de données (drapeau, coordonnées et langue officielle)
+
 (Done) Adapter le modèle html pour la base de données complete
+
 (Done) Adapter le serveur pour comporter la carte glissante
+
 (Done) Tester l'ensemble
+
 Documentation
+
 Vidéo démo
 
 ----------------------------------------------------------------------
 Division des tâches:
 
 Base de données : Natalie et Heitor
+
 Serveur : Chloé et Maxence
+
 Interface : Luisa
 
 ----------------------------------------------------------------------
